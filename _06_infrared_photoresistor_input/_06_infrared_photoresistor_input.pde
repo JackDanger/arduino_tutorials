@@ -1,0 +1,21 @@
+#define LED 9
+#define PHOTO 0
+
+int val = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(LED, OUTPUT);
+  pinMode(PHOTO, INPUT);
+}
+
+void loop()
+{
+  val = analogRead(PHOTO);
+  if(val > 3){
+    Serial.println(val);
+  }
+  analogWrite(LED, 20 + (val * 4));
+  delay(20);
+}
