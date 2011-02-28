@@ -13,10 +13,6 @@ nothing  ---  0      0     --SERIAL OUT
 
 */
 
-/* INITIALIZATION */
-// #include <ServoTimer1.h>
-// ServoTimer1 servo1;
-
 #define CLOCK 4 // set the CLOCK pin
 #define LATCH 3 // set the LATCH pin
 #define DATIN 2 // set the data in pin
