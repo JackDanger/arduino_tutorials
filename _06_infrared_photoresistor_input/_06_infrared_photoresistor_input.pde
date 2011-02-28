@@ -1,3 +1,6 @@
+// Notes:
+// This required 50K ohms on the infrared photoresistor to get a reading above 1.
+
 #define LED 9
 #define PHOTO 0
 

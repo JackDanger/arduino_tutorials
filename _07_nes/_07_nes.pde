@@ -6,9 +6,9 @@
 
 int latch = 2; // set the latch pin
 int clock = 3; // set the clock pin
-int datin = 4;// set the data in pin
+int datin = 4; // set the data in pin
 byte controller_data = 0;
-int ledpin = 11;
+int ledpin = 9;
 
 
 /* SETUP */
