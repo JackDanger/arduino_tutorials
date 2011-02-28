@@ -1,5 +1,18 @@
 // Taken from: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1254964306/0#0
 
+/*
+Plug:
+                _____
+               /
+              /      0     --0v (ground)
+    +5V  ---  0      0     --CLOCK
+nothing  ---  0      0     --LATCH
+nothing  ---  0      0     --SERIAL OUT
+               _______ 
+
+
+*/
+
 /* INITIALIZATION */
 // #include <ServoTimer1.h>
 // ServoTimer1 servo1;
