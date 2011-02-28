@@ -98,15 +98,16 @@ void loop() {
   }
 
 
-  //for REFERENCE:
-  //A      01111111
-  //B      10111111
-  //SELECT 11011111
-  //START  11101111
-  //UP     11110111
-  //DOWN   11111011
-  //LEFT   11111101
-  //RIGHT  11111110
+  // The DATIN port will transmit, one bit at a time,
+  // a full byte of data corresponding to the 8 buttons:
+  //  A      01111111
+  //  B      10111111
+  //  SELECT 11011111
+  //  START  11101111
+  //  UP     11110111
+  //  DOWN   11111011
+  //  LEFT   11111101
+  //  RIGHT  11111110
 
   if (controller_data==B01111111){
     timer_a = COUNTDOWN;
