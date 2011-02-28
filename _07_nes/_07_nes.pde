@@ -1,5 +1,11 @@
 // Based on: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1254964306/0#0
 
+#define CLOCK 4 // set the CLOCK pin
+#define LATCH 3 // set the LATCH pin
+#define DATIN 2 // set the data in pin
+
+#define COUNTDOWN 500
+
 /*
 Plug:
                 _____
@@ -11,13 +17,15 @@ nothing  ---  0      0     --SERIAL OUT
                _______ 
 
 
+How to: Just push a wire into each hold of the plug and attach
+        the other end of the wire to the appropriate input pin.
+        No soldering required so long as you can spare a hand to
+        hold the wires in place.
+        If you have a board with fewer pins than the 8 out * 3 in
+        as described in this code just use as many as you can and
+        alter the following #defines to set any extra buttons to
+        the same output pin.
 */
-
-#define CLOCK 4 // set the CLOCK pin
-#define LATCH 3 // set the LATCH pin
-#define DATIN 2 // set the data in pin
-
-#define COUNTDOWN 500
 
 #define A      6
 #define B      7
