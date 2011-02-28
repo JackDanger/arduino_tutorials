@@ -1,4 +1,4 @@
-// Taken from: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1254964306/0#0
+// Based on: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1254964306/0#0
 
 /*
 Plug:
@@ -17,11 +17,9 @@ nothing  ---  0      0     --SERIAL OUT
 // #include <ServoTimer1.h>
 // ServoTimer1 servo1;
 
-int clock = 4; // set the clock pin
-int latch = 3; // set the latch pin
-int datin = 2; // set the data in pin
-byte controller_data = 0;
-
+#define CLOCK 4 // set the CLOCK pin
+#define LATCH 3 // set the LATCH pin
+#define DATIN 2 // set the data in pin
 
 #define COUNTDOWN 500
 
@@ -43,47 +41,49 @@ int timer_right   = 0;
 int timer_start   = 0;
 int timer_select  = 0;
 
+byte controller_data = 0;
+
 
 /* SETUP */
 void setup() {
   Serial.begin(57600);
-  pinMode(latch,OUTPUT);
-  pinMode(clock,OUTPUT);
-  pinMode(datin,INPUT);
+  pinMode(LATCH, OUTPUT);
+  pinMode(CLOCK, OUTPUT);
+  pinMode(DATIN, INPUT);
 
-  pinMode(A, OUTPUT);
-  pinMode(B, OUTPUT);
+  pinMode(A,      OUTPUT);
+  pinMode(B,      OUTPUT);
   pinMode(SELECT, OUTPUT);
-  pinMode(START, OUTPUT);
-  pinMode(UP, OUTPUT);
-  pinMode(DOWN, OUTPUT);
-  pinMode(LEFT, OUTPUT);
-  pinMode(RIGHT, OUTPUT);
+  pinMode(START,  OUTPUT);
+  pinMode(UP,     OUTPUT);
+  pinMode(DOWN,   OUTPUT);
+  pinMode(LEFT,   OUTPUT);
+  pinMode(RIGHT,  OUTPUT);
 
-  digitalWrite(latch,HIGH);
-  digitalWrite(clock,HIGH);
+  digitalWrite(LATCH, HIGH);
+  digitalWrite(CLOCK, HIGH);
 
 }
 
 /* THIS READS DATA FROM THE CONTROLLER */
 void controllerRead() {
   controller_data = 0;
-  digitalWrite(latch,LOW);
-  digitalWrite(clock,LOW);
+  digitalWrite(LATCH, LOW);
+  digitalWrite(CLOCK, LOW);
 
-  digitalWrite(latch,HIGH);
+  digitalWrite(LATCH, HIGH);
   delayMicroseconds(2);
-  digitalWrite(latch,LOW);
+  digitalWrite(LATCH, LOW);
 
-  controller_data = digitalRead(datin);
+  controller_data = digitalRead(DATIN);
 
   for (int i = 1; i <= 7; i ++) {
-    digitalWrite(clock,HIGH);
+    digitalWrite(CLOCK, HIGH);
     delayMicroseconds(2);
     controller_data = controller_data << 1;
-    controller_data = controller_data + digitalRead(datin) ;
+    controller_data = controller_data + digitalRead(DATIN) ;
     delayMicroseconds(4);
-    digitalWrite(clock,LOW);
+    digitalWrite(CLOCK, LOW);
   }
 
 }
