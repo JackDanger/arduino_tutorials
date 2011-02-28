@@ -17,11 +17,31 @@ nothing  ---  0      0     --SERIAL OUT
 // #include <ServoTimer1.h>
 // ServoTimer1 servo1;
 
-int latch = 2; // set the latch pin
-int clock = 3; // set the clock pin
-int datin = 4; // set the data in pin
+int clock = 4; // set the clock pin
+int latch = 3; // set the latch pin
+int datin = 2; // set the data in pin
 byte controller_data = 0;
-int ledpin = 9;
+
+
+#define COUNTDOWN 500
+
+#define A      6
+#define B      7
+#define SELECT 8
+#define START  9
+#define UP     11
+#define DOWN   12
+#define LEFT   13
+#define RIGHT  10
+
+int timer_a       = 0;
+int timer_b       = 0;
+int timer_up      = 0;
+int timer_down    = 0;
+int timer_left    = 0;
+int timer_right   = 0;
+int timer_start   = 0;
+int timer_select  = 0;
 
 
 /* SETUP */
@@ -30,12 +50,18 @@ void setup() {
   pinMode(latch,OUTPUT);
   pinMode(clock,OUTPUT);
   pinMode(datin,INPUT);
-  pinMode(ledpin, OUTPUT);
+
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(SELECT, OUTPUT);
+  pinMode(START, OUTPUT);
+  pinMode(UP, OUTPUT);
+  pinMode(DOWN, OUTPUT);
+  pinMode(LEFT, OUTPUT);
+  pinMode(RIGHT, OUTPUT);
 
   digitalWrite(latch,HIGH);
   digitalWrite(clock,HIGH);
-
-  // servo1.attach(10);
 
 }
 
@@ -67,43 +93,91 @@ void loop() {
 
   controllerRead();
 
-  Serial.println(controller_data, BIN);
+  if(controller_data != B11111111){
+    Serial.println(controller_data, BIN);
+  }
 
-  // if (controller_data==B11101111){
-    // Serial.println("Button has been Pressed");   
-     //}  else {
-     //Serial.println("Button not pressed");
-     //}
 
-  //for REFERENCE:  
-  //UP = 11110111
-  //DOWN=11111011
-  //LEFT=11111101
-  //RIGHT=11111110
-  //SELECT=11011111
-  //START=11101111
-  //A=01111111
-  //B=10111111
+  //for REFERENCE:
+  //A      01111111
+  //B      10111111
+  //SELECT 11011111
+  //START  11101111
+  //UP     11110111
+  //DOWN   11111011
+  //LEFT   11111101
+  //RIGHT  11111110
 
   if (controller_data==B01111111){
-   digitalWrite(ledpin, HIGH);
-   }
- 
+    timer_a = COUNTDOWN;
+    digitalWrite(A, HIGH);
+  }
   if (controller_data==B10111111){
-   digitalWrite(ledpin, LOW);
+    timer_b = COUNTDOWN;
+    digitalWrite(B, HIGH);
+  }
+  if (controller_data==B11011111){
+    timer_select = COUNTDOWN;
+    digitalWrite(SELECT, HIGH);
+  }
+  if (controller_data==B11101111){
+    timer_start = COUNTDOWN;
+    digitalWrite(START, HIGH);
+  }
+  if (controller_data==B11110111){
+    timer_up = COUNTDOWN;
+    digitalWrite(UP, HIGH);
+  }
+  if (controller_data==B11111011){
+    timer_down = COUNTDOWN;
+    digitalWrite(DOWN, HIGH);
+  }
+  if (controller_data==B11111101){
+    timer_left = COUNTDOWN;
+    digitalWrite(LEFT, HIGH);
+  }
+  if (controller_data==B11111110){
+    timer_right = COUNTDOWN;
+    digitalWrite(RIGHT, HIGH);
   }
  
-  // if (controller_data==B11110111){
-  //  servo1.write(180);
-  // }  
-  // 
-  // if (controller_data==B11111011){
-  //  servo1.write(0);
-  // }
-  // 
-  // if (controller_data==B11111110){
-  //  servo1.write(90);
-  // }
+  if (timer_a > 0){ timer_a--; }
+  if (1 == timer_a) {
+    digitalWrite(A, LOW);
+  }
 
-  delay(100);
+  if (timer_b > 0){ timer_b--; }
+  if (1 == timer_b) {
+    digitalWrite(B, LOW);
+  }
+
+  if (timer_select > 0){ timer_select--; }
+  if (1 == timer_select) {
+    digitalWrite(SELECT, LOW);
+  }
+
+  if (timer_start > 0){ timer_start--; }
+  if (1 == timer_start) {
+    digitalWrite(START, LOW);
+  }
+
+  if (timer_up > 0){ timer_up--; }
+  if (1 == timer_up) {
+    digitalWrite(UP, LOW);
+  }
+
+  if (timer_down > 0){ timer_down--; }
+  if (1 == timer_down) {
+    digitalWrite(DOWN, LOW);
+  }
+
+  if (timer_left > 0){ timer_left--; }
+  if (1 == timer_left) {
+    digitalWrite(LEFT, LOW);
+  }
+  if (timer_right > 0){ timer_right--; }
+  if (1 == timer_right) {
+    digitalWrite(RIGHT, LOW);
+  }
+
 } 
